@@ -1,0 +1,16 @@
+{
+  "version": "140.9.0esr-bb20",
+  "updated_at": "2026-03-26T00:00:00Z",
+  "darwin": {
+    "aarch64": {
+      "os": "mac-arm64",
+      "artifact": "mac-arm64.dmg",
+      "hash": "sha256-+YGRZyWyDy3p41vrEKeFPxhN2/VJfwrf5xBcZNVXcHA="
+    },
+    "x86_64": {
+      "os": "mac",
+      "artifact": "mac.dmg",
+      "hash": "sha256-v2dKoyGdMySiWyRdLPbJRjCe6ggpp4f0AZ/Fvyj1ALY="
+    }
+  }
+}
