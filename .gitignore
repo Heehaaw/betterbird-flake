@@ -1,0 +1,12 @@
+# Nix build outputs
+result
+result-*
+
+# Local environment
+.direnv/
+
+# Editor metadata
+.idea/
+
+# macOS
+.DS_Store
