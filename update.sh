@@ -6,10 +6,12 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 metadata_file="$repo_root/metadata.json"
 
 downloads_page="$(curl -fsSL 'https://www.betterbird.eu/downloads/')"
-version="$((printf '%s\n' "$downloads_page" \
-  | grep -oE 'Current version: Betterbird [^ <]+' \
-  | awk '{ print $4 }' \
-  | head -n1))"
+version="$(
+  printf '%s\n' "$downloads_page" \
+    | grep -oE 'Current version: Betterbird [^ <]+' \
+    | awk '{ print $4 }' \
+    | head -n1
+)"
 
 if [ -z "$version" ]; then
   echo "Unable to determine Betterbird version from downloads page" >&2
@@ -19,10 +21,14 @@ fi
 major="${version%%.*}"
 checksums="$(curl -fsSL "https://www.betterbird.eu/downloads/sha256-${major}.txt")"
 
-arm_hex="$((printf '%s\n' "$checksums" \
-  | awk -v version="$version" '$2 == "*betterbird-" version ".en-US.mac-arm64.dmg" { print $1; exit }'))"
-x86_hex="$((printf '%s\n' "$checksums" \
-  | awk -v version="$version" '$2 == "*betterbird-" version ".en-US.mac.dmg" { print $1; exit }'))"
+arm_hex="$(
+  printf '%s\n' "$checksums" \
+    | awk -v version="$version" '$2 == "*betterbird-" version ".en-US.mac-arm64.dmg" { print $1; exit }'
+)"
+x86_hex="$(
+  printf '%s\n' "$checksums" \
+    | awk -v version="$version" '$2 == "*betterbird-" version ".en-US.mac.dmg" { print $1; exit }'
+)"
 
 if [ -z "$arm_hex" ] || [ -z "$x86_hex" ]; then
   echo "Unable to find macOS checksum entries for Betterbird $version" >&2
