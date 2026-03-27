@@ -6,18 +6,16 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 metadata_file="$repo_root/metadata.json"
 
 downloads_page="$(curl -fsSL 'https://www.betterbird.eu/downloads/')"
-current_version="$(
-  printf '%s\n' "$downloads_page" \
-    | grep -oE 'Current version: Betterbird [^ <]+' \
-    | awk '{ print $4 }' \
-    | head -n1
-)"
-previous_version="$(
-  printf '%s\n' "$downloads_page" \
-    | grep -oE 'Previous version: Betterbird [^ <]+' \
-    | awk '{ print $4 }' \
-    | head -n1
-)"
+current_version=""
+previous_version=""
+
+if [[ $downloads_page =~ Current[[:space:]]version:[[:space:]]Betterbird[[:space:]]([^[:space:]<]+) ]]; then
+  current_version="${BASH_REMATCH[1]}"
+fi
+
+if [[ $downloads_page =~ Previous[[:space:]]version:[[:space:]]Betterbird[[:space:]]([^[:space:]<]+) ]]; then
+  previous_version="${BASH_REMATCH[1]}"
+fi
 
 if [ -z "$current_version" ] || [ -z "$previous_version" ]; then
   echo "Unable to determine Betterbird versions from downloads page" >&2
@@ -38,8 +36,7 @@ checksums="$(
 lookup_hex() {
   local file_name="$1"
 
-  printf '%s\n' "$checksums" \
-    | awk -v file_name="$file_name" '$2 == "*" file_name { print $1; exit }'
+  awk -v file_name="$file_name" '$2 == "*" file_name { print $1; exit }' <<< "$checksums"
 }
 
 to_sri() {
