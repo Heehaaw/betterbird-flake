@@ -1,14 +1,79 @@
 {
   "version": "140.9.0esr-bb20",
-  "updated_at": "2026-03-26T00:00:00Z",
+  "available_versions": [
+    "140.9.0esr-bb20",
+    "140.8.0esr-bb19",
+    "140.7.1esr-bb18-new-cert2",
+    "140.7.1esr-bb18-new-cert",
+    "140.7.1esr-bb18",
+    "140.7.0esr-bb17",
+    "140.6.0esr-bb16",
+    "140.6.0esr-bb15-build2",
+    "140.6.0esr-bb15",
+    "140.5.0esr-bb14",
+    "140.4.0esr-bb13",
+    "140.3.1esr-bb12",
+    "140.3.0esr-bb11",
+    "140.2.1esr-bb10-build2",
+    "140.2.0esr-bb9",
+    "140.1.1esr-bb8",
+    "140.1.0esr-bb7",
+    "140.0.1esr-bb6",
+    "128.14.0esr-bb32",
+    "128.13.0esr-bb31",
+    "128.12.0esr-bb30",
+    "128.11.1esr-bb29",
+    "128.11.0esr-bb28",
+    "128.10.1esr-bb27-build2",
+    "128.10.1esr-bb27",
+    "128.10.0esr-bb26",
+    "128.9.2esr-bb25",
+    "128.9.0esr-bb24",
+    "128.8.0esr-bb23",
+    "128.7.0esr-bb22",
+    "128.6.1esr-bb21",
+    "128.6.0esr-bb20",
+    "128.5.2esr-bb19",
+    "128.5.0esr-bb18",
+    "128.4.3esr-bb17",
+    "128.4.3esr-bb17-build2"
+  ],
+  "updated_at": "2026-03-27T09:14:29Z",
+  "linux": {
+    "x86_64": {
+      "os": "linux",
+      "file_name": "betterbird-140.9.0esr-bb20.en-US.linux-x86_64.tar.xz",
+      "artifact": "linux-x86_64.tar.xz",
+      "hash": "sha256-YtBAy1vz59Nezk0mcA+TJPPhc2dkhCHl4XfH0Zo5MCQ="
+    }
+  },
+  "windows": {
+    "x86_64": {
+      "installer": {
+        "os": "win",
+        "file_name": "betterbird-140.9.0esr-bb20.en-US.win64.installer.exe",
+        "artifact": "win64.installer.exe",
+        "hash": "sha256-Ou7bVzoJIsQKeE77HaO+LbV2JVwcK1ZsPz2SEE4TBaQ="
+      },
+      "portable": {
+        "os": "win",
+        "portable": true,
+        "file_name": "BetterbirdPortable-140.9.0esr-bb20.en-US.win64.zip",
+        "artifact": "win64.zip",
+        "hash": "sha256-84GvuobVnR1rW9Gb7K8i0FEt/3h/vMTtfEqyjrG4g2k="
+      }
+    }
+  },
   "darwin": {
     "aarch64": {
       "os": "mac-arm64",
+      "file_name": "betterbird-140.9.0esr-bb20.en-US.mac-arm64.dmg",
       "artifact": "mac-arm64.dmg",
       "hash": "sha256-+YGRZyWyDy3p41vrEKeFPxhN2/VJfwrf5xBcZNVXcHA="
     },
     "x86_64": {
       "os": "mac",
+      "file_name": "betterbird-140.9.0esr-bb20.en-US.mac.dmg",
       "artifact": "mac.dmg",
       "hash": "sha256-v2dKoyGdMySiWyRdLPbJRjCe6ggpp4f0AZ/Fvyj1ALY="
     }

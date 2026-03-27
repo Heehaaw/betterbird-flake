@@ -1,20 +1,30 @@
-{
-  lib,
-  stdenvNoCC,
-  fetchurl,
-  undmg,
-  metadata,
+{ lib
+, stdenvNoCC
+, fetchurl
+, metadata
+, undmg ? null
+, autoPatchelfHook ? null
+, wrapGAppsHook3 ? null
+, patchelfUnstable ? null
+, alsa-lib ? null
+,
 }:
 
 let
   pname = "betterbird";
   version = metadata.version;
   platform = stdenvNoCC.hostPlatform.system;
-  releaseKey = {
-    aarch64-darwin = "aarch64";
-    x86_64-darwin = "x86_64";
-  }.${platform} or (throw "Unsupported system: ${platform}");
-  release = metadata.darwin.${releaseKey};
+  linuxInstallPhase = builtins.readFile ./install/linux.sh;
+  darwinInstallPhase = builtins.readFile ./install/darwin.sh;
+  release =
+    if platform == "x86_64-linux" then
+      metadata.linux.x86_64 // { kind = "linux"; }
+    else if platform == "aarch64-darwin" then
+      metadata.darwin.aarch64 // { kind = "darwin"; }
+    else if platform == "x86_64-darwin" then
+      metadata.darwin.x86_64 // { kind = "darwin"; }
+    else
+      throw "Unsupported system: ${platform}";
 in
 stdenvNoCC.mkDerivation {
   inherit pname version;
@@ -25,35 +35,38 @@ stdenvNoCC.mkDerivation {
     hash = release.hash;
   };
 
-  sourceRoot = ".";
-  nativeBuildInputs = [ undmg ];
+  sourceRoot = if release.kind == "linux" then "betterbird" else ".";
 
-  # The upstream DMG ships a signed app bundle; avoid fixups that would break the signature.
-  dontFixup = true;
+  nativeBuildInputs =
+    lib.optionals (release.kind == "linux") [
+      autoPatchelfHook
+      patchelfUnstable
+      wrapGAppsHook3
+    ]
+    ++ lib.optionals (release.kind == "darwin") [
+      undmg
+    ];
 
-  installPhase = ''
-    runHook preInstall
+  buildInputs = lib.optionals (release.kind == "linux") [ alsa-lib ];
 
-    mkdir -p "$out/Applications"
-    shopt -s nullglob
-    apps=(Betterbird*.app betterbird*.app)
+  # Thunderbird uses relrhack, so keep autoPatchelf from clobbering old sections.
+  patchelfFlags = lib.optionals (release.kind == "linux") [ "--no-clobber-old-sections" ];
 
-    if [ "''${#apps[@]}" -ne 1 ]; then
-      echo "Expected exactly one Betterbird app bundle, found: ''${apps[*]}" >&2
-      exit 1
-    fi
-
-    mv "''${apps[0]}" "$out/Applications/Betterbird.app"
-
-    runHook postInstall
+  postPatch = lib.optionalString (release.kind == "linux") ''
+    echo 'pref("app.update.auto", "false");' >> defaults/pref/channel-prefs.js
   '';
 
+  # The upstream DMG ships a signed app bundle; avoid fixups that would break the signature.
+  dontFixup = release.kind == "darwin";
+
+  installPhase = if release.kind == "linux" then linuxInstallPhase else darwinInstallPhase;
+
   meta = {
-    description = "Betterbird mail client for macOS";
+    description = "Betterbird mail client";
     homepage = "https://www.betterbird.eu/";
     license = lib.licenses.mpl20;
-    mainProgram = "Betterbird";
-    platforms = lib.platforms.darwin;
+    mainProgram = if release.kind == "linux" then "betterbird" else "Betterbird";
+    platforms = [ "x86_64-linux" "aarch64-darwin" "x86_64-darwin" ];
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
   };
 }
