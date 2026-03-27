@@ -14,12 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: cachix/install-nix-action@v31
-      - run: sudo apt-get update && sudo apt-get install -y jq
       - run: bash ./update.sh
       - run: nix flake show
       - run: nix eval .#lib.metadata.version
       - name: Commit metadata update
-        run: |
+        run: | # language=bash
           if git diff --quiet; then
             echo "No changes"
             exit 0
