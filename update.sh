@@ -6,32 +6,54 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 metadata_file="$repo_root/metadata.json"
 
 downloads_page="$(curl -fsSL 'https://www.betterbird.eu/downloads/')"
-current_version=""
+current_display_version=""
 previous_version=""
 
 if [[ $downloads_page =~ Current[[:space:]]version:[[:space:]]Betterbird[[:space:]]([^[:space:]<]+) ]]; then
-  current_version="${BASH_REMATCH[1]}"
+  current_display_version="${BASH_REMATCH[1]}"
 fi
 
 if [[ $downloads_page =~ Previous[[:space:]]version:[[:space:]]Betterbird[[:space:]]([^[:space:]<]+) ]]; then
   previous_version="${BASH_REMATCH[1]}"
 fi
 
-if [ -z "$current_version" ] || [ -z "$previous_version" ]; then
+if [ -z "$current_display_version" ] || [ -z "$previous_version" ]; then
   echo "Unable to determine Betterbird versions from downloads page" >&2
   exit 1
 fi
 
-current_major="${current_version%%.*}"
+current_major="${current_display_version%%.*}"
 previous_major="${previous_version%%.*}"
+current_checksums="$(curl -fsSL "https://www.betterbird.eu/downloads/sha256-${current_major}.txt")"
 checksums="$(
-  curl -fsSL "https://www.betterbird.eu/downloads/sha256-${current_major}.txt"
+  printf '%s\n' "$current_checksums"
 
   if [ "$previous_major" != "$current_major" ]; then
     printf '\n'
     curl -fsSL "https://www.betterbird.eu/downloads/sha256-${previous_major}.txt"
   fi
 )"
+
+# The page's display version can omit artifact suffixes such as a replacement build number.
+current_version="$(
+  awk -v version_prefix="$current_display_version" '
+    $2 ~ /^\*betterbird-.*\.en-US\.linux-x86_64\.tar\.(xz|bz2)$/ {
+      file_name = substr($2, 2)
+      sub(/^betterbird-/, "", file_name)
+      sub(/\.en-US\.linux-x86_64\.tar\.(xz|bz2)$/, "", file_name)
+
+      if (index(file_name, version_prefix) == 1) {
+        print file_name
+        exit
+      }
+    }
+  ' <<< "$current_checksums"
+)"
+
+if [ -z "$current_version" ]; then
+  echo "Unable to determine the Betterbird artifact version for $current_display_version" >&2
+  exit 1
+fi
 
 lookup_hex() {
   local file_name="$1"
