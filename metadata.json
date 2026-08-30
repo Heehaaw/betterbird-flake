@@ -1,6 +1,7 @@
 {
-  "version": "153.1.0esr-bb7-build2",
+  "version": "153.2.0esr-bb8",
   "available_versions": [
+    "153.2.0esr-bb8",
     "153.1.0esr-bb7-build2",
     "153.0esr-bb6-build6",
     "153.0esr-bb6-build2",
@@ -29,44 +30,44 @@
     "140.1.0esr-bb7",
     "140.0.1esr-bb6"
   ],
-  "updated_at": "2026-08-26T11:47:19Z",
+  "updated_at": "2026-08-30T09:58:34Z",
   "linux": {
     "x86_64": {
       "os": "linux",
-      "file_name": "betterbird-153.1.0esr-bb7-build2.en-US.linux-x86_64.tar.xz",
+      "file_name": "betterbird-153.2.0esr-bb8.en-US.linux-x86_64.tar.xz",
       "artifact": "linux-x86_64.tar.xz",
-      "hash": "sha256-40E+PcVxRTFJwLdvaG9+rdL2fIJOO/bEiXuqG3+uy2s="
+      "hash": "sha256-FC67Y9P4TG1KiCUs7Swt0s5dKOs7CLBfENhB/j1PgAE="
     }
   },
   "windows": {
     "x86_64": {
       "installer": {
         "os": "win",
-        "file_name": "betterbird-153.1.0esr-bb7-build2.en-US.win64.installer.exe",
+        "file_name": "betterbird-153.2.0esr-bb8.en-US.win64.installer.exe",
         "artifact": "win64.installer.exe",
-        "hash": "sha256-1M2pMvfiWdXLRxoOvJg8zgL8SgWeIluupRFhTUHtsuM="
+        "hash": "sha256-m5BbfG1KZuEi9wNYyhYQ6LCtf8Af/jSzNhRaHmz8zOM="
       },
       "portable": {
         "os": "win",
         "portable": true,
-        "file_name": "BetterbirdPortable-153.1.0esr-bb7-build2.en-US.win64.zip",
+        "file_name": "BetterbirdPortable-153.2.0esr-bb8.en-US.win64.zip",
         "artifact": "win64.zip",
-        "hash": "sha256-4XmII57D24E40hXGIho+4pEc/mX75R5X9Yql6fIubOY="
+        "hash": "sha256-bMhFF03w0rmkmt9vMRjFjdP0abE+n518tcmEKhihRWY="
       }
     }
   },
   "darwin": {
     "aarch64": {
       "os": "mac-arm64",
-      "file_name": "betterbird-153.1.0esr-bb7-build2.en-US.mac-arm64.dmg",
+      "file_name": "betterbird-153.2.0esr-bb8.en-US.mac-arm64.dmg",
       "artifact": "mac-arm64.dmg",
-      "hash": "sha256-yn6GB/6UVWj2annZQI7xUNTR2jRTDEzDotFmymYAc+c="
+      "hash": "sha256-iWdp8Cwuyc9pK0c4VNVL9E7uWqF2gJh8PGGsM4Q2eE4="
     },
     "x86_64": {
       "os": "mac",
-      "file_name": "betterbird-153.1.0esr-bb7-build2.en-US.mac.dmg",
+      "file_name": "betterbird-153.2.0esr-bb8.en-US.mac.dmg",
       "artifact": "mac.dmg",
-      "hash": "sha256-GN3fgZuj/c3MbJ+eUCQMTlbbLKDGhu3ylpX6jx41XPI="
+      "hash": "sha256-+7sXB4X+bzxF9wr+Whr0glfVGQVEFgyFrJup/45afJI="
     }
   }
 }
