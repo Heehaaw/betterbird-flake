@@ -25,12 +25,16 @@ let
       metadata.darwin.x86_64 // { kind = "darwin"; }
     else
       throw "Unsupported system: ${platform}";
+
+  # Fetch the pinned release's own file. get.php's version=release always serves the newest
+  # build, so any lock older than the latest upstream release would fail its hash check.
+  downloadDirectory = if release.kind == "linux" then "LinuxArchive" else "MacDiskImage";
 in
 stdenvNoCC.mkDerivation {
   inherit pname version;
 
   src = fetchurl {
-    url = "https://www.betterbird.eu/downloads/get.php?os=${release.os}&lang=en-US&version=release";
+    url = "https://www.betterbird.eu/downloads/${downloadDirectory}/${release.file_name}";
     name = "${pname}-${version}.en-US.${release.artifact}";
     hash = release.hash;
   };
