@@ -1,6 +1,7 @@
 {
-  "version": "153.7.0esr-bb13",
+  "version": "153.8.0esr-bb14",
   "available_versions": [
+    "153.8.0esr-bb14",
     "153.7.0esr-bb13",
     "153.6.0esr-bb12",
     "153.5.0esr-bb11",
@@ -35,44 +36,44 @@
     "140.1.0esr-bb7",
     "140.0.1esr-bb6"
   ],
-  "updated_at": "2026-11-11T11:55:51Z",
+  "updated_at": "2026-11-22T12:39:59Z",
   "linux": {
     "x86_64": {
       "os": "linux",
-      "file_name": "betterbird-153.7.0esr-bb13.en-US.linux-x86_64.tar.xz",
+      "file_name": "betterbird-153.8.0esr-bb14.en-US.linux-x86_64.tar.xz",
       "artifact": "linux-x86_64.tar.xz",
-      "hash": "sha256-FF0Ho0/AW7pQpBstk7xXaS4GkOV+b9nKQTwvy2QsOTQ="
+      "hash": "sha256-mJVp7tUip2eSoYFoHIyqqs7hhVmbD1uMT/Wk/p2SEpI="
     }
   },
   "windows": {
     "x86_64": {
       "installer": {
         "os": "win",
-        "file_name": "betterbird-153.7.0esr-bb13.en-US.win64.installer.exe",
+        "file_name": "betterbird-153.8.0esr-bb14.en-US.win64.installer.exe",
         "artifact": "win64.installer.exe",
-        "hash": "sha256-z+DMIeBmJ2EWcKEDY1UQ9zhuwHjVzO47eOLwmXcZCnw="
+        "hash": "sha256-g3HL4QQRBWbqxj9k1ac3g5+r2/CWDNzw+5grEYDvan8="
       },
       "portable": {
         "os": "win",
         "portable": true,
-        "file_name": "BetterbirdPortable-153.7.0esr-bb13.en-US.win64.zip",
+        "file_name": "BetterbirdPortable-153.8.0esr-bb14.en-US.win64.zip",
         "artifact": "win64.zip",
-        "hash": "sha256-ZOXIBy7+whHHkRnPRagb8AleDNx+DWSEXApqDrAABN8="
+        "hash": "sha256-aq57vv/ASrhvWta3sZ96o0pHmHv3r7XofXOM1mU8yUw="
       }
     }
   },
   "darwin": {
     "aarch64": {
       "os": "mac-arm64",
-      "file_name": "betterbird-153.7.0esr-bb13.en-US.mac-arm64.dmg",
+      "file_name": "betterbird-153.8.0esr-bb14.en-US.mac-arm64.dmg",
       "artifact": "mac-arm64.dmg",
-      "hash": "sha256-terLK6HBG24bNsc4mGESRrCn84Qxpz37tHYhFjk6mNk="
+      "hash": "sha256-Ff2yKHAWJgK6TOeSon/hACEW4zqfGyZnnvWd2HX546o="
     },
     "x86_64": {
       "os": "mac",
-      "file_name": "betterbird-153.7.0esr-bb13.en-US.mac.dmg",
+      "file_name": "betterbird-153.8.0esr-bb14.en-US.mac.dmg",
       "artifact": "mac.dmg",
-      "hash": "sha256-v38Nw2WKzSg3b+xzQBeEa2MIh9b/HuPQ4qoHteiyUmg="
+      "hash": "sha256-v78ngY/lWnSoiJE1Z40ExRKc6hwGCAsSJ1f5WhantZI="
     }
   }
 }
